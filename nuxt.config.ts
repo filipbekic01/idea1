@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ['nuxt-auth-utils', '@nuxt/eslint'],
+  modules: ['nuxt-auth-utils', '@nuxt/eslint', '@nuxtjs/tailwindcss'],
   devtools: { enabled: true },
   runtimeConfig: {
     databaseUrl: process.env.DATABASE_URL ?? 'postgres://postgres:postgres@localhost:5432/digi',
