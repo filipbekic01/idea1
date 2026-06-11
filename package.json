@@ -8,6 +8,9 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
+    "typecheck": "nuxt typecheck",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push"
@@ -21,7 +24,12 @@
     "vue-router": "^5.1.0"
   },
   "devDependencies": {
-    "drizzle-kit": "^0.31.10"
+    "@nuxt/eslint": "^1.16.0",
+    "@types/node": "^25.9.2",
+    "drizzle-kit": "^0.31.10",
+    "eslint": "^9.39.4",
+    "typescript": "^6.0.3",
+    "vue-tsc": "^3.3.4"
   },
   "packageManager": "pnpm@11.5.1"
 }

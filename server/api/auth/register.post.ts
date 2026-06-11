@@ -1,4 +1,5 @@
 import { eq } from 'drizzle-orm'
+import type { User } from '#shared/models/user'
 import { db } from '../../db'
 import { users } from '../../db/schema'
 
@@ -26,6 +27,11 @@ export default defineEventHandler(async (event) => {
     .values({ email, password: await hashPassword(password) })
     .returning({ id: users.id, email: users.email })
 
+  if (!user) {
+    throw createError({ statusCode: 500, statusMessage: 'Failed to create user' })
+  }
+
   await setUserSession(event, { user })
-  return user
+  const result: User = user
+  return result
 })

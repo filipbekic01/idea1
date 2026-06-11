@@ -10,7 +10,7 @@
             type="email"
             name="email"
             autocomplete="email"
-          />
+          >
         </label>
       </p>
       <p>
@@ -21,14 +21,21 @@
             type="password"
             name="password"
             autocomplete="current-password"
-          />
+          >
         </label>
       </p>
       <p>
-        <button type="submit" :disabled="loading">Login</button>
+        <button
+          type="submit"
+          :disabled="loading"
+        >
+          Login
+        </button>
       </p>
     </form>
-    <p v-if="error">{{ error }}</p>
+    <p v-if="error">
+      {{ error }}
+    </p>
     <p>
       No account?
       <NuxtLink to="/register">Register</NuxtLink>
@@ -37,28 +44,31 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({middleware: "guest"});
+definePageMeta({ middleware: 'guest' })
 
-const {fetch: fetchSession} = useUserSession();
-const email = ref("");
-const password = ref("");
-const error = ref("");
-const loading = ref(false);
+const { fetch: fetchSession } = useUserSession()
+const email = ref('')
+const password = ref('')
+const error = ref('')
+const loading = ref(false)
 
 async function onSubmit() {
-  error.value = "";
-  loading.value = true;
+  error.value = ''
+  loading.value = true
   try {
-    await $fetch("/api/auth/login", {
-      method: "POST",
-      body: {email: email.value, password: password.value},
-    });
-    await fetchSession();
-    await navigateTo("/");
-  } catch (e: any) {
-    error.value = e?.data?.statusMessage ?? e?.statusMessage ?? "Login failed";
-  } finally {
-    loading.value = false;
+    await $fetch('/api/auth/login', {
+      method: 'POST',
+      body: { email: email.value, password: password.value },
+    })
+    await fetchSession()
+    await navigateTo('/')
+  }
+  catch (e) {
+    const err = e as { data?: { statusMessage?: string }, statusMessage?: string }
+    error.value = err?.data?.statusMessage ?? err?.statusMessage ?? 'Login failed'
+  }
+  finally {
+    loading.value = false
   }
 }
 </script>

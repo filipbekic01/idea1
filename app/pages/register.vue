@@ -5,20 +5,37 @@
       <p>
         <label>
           Email
-          <input v-model="email" type="email" name="email" autocomplete="email" />
+          <input
+            v-model="email"
+            type="email"
+            name="email"
+            autocomplete="email"
+          >
         </label>
       </p>
       <p>
         <label>
           Password
-          <input v-model="password" type="password" name="password" autocomplete="new-password" />
+          <input
+            v-model="password"
+            type="password"
+            name="password"
+            autocomplete="new-password"
+          >
         </label>
       </p>
       <p>
-        <button type="submit" :disabled="loading">Register</button>
+        <button
+          type="submit"
+          :disabled="loading"
+        >
+          Register
+        </button>
       </p>
     </form>
-    <p v-if="error">{{ error }}</p>
+    <p v-if="error">
+      {{ error }}
+    </p>
     <p>
       Already have an account?
       <NuxtLink to="/login">Login</NuxtLink>
@@ -45,9 +62,12 @@ async function onSubmit() {
     })
     await fetchSession()
     await navigateTo('/')
-  } catch (e: any) {
-    error.value = e?.data?.statusMessage ?? e?.statusMessage ?? 'Registration failed'
-  } finally {
+  }
+  catch (e) {
+    const err = e as { data?: { statusMessage?: string }, statusMessage?: string }
+    error.value = err?.data?.statusMessage ?? err?.statusMessage ?? 'Registration failed'
+  }
+  finally {
     loading.value = false
   }
 }

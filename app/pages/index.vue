@@ -2,7 +2,9 @@
   <div>
     <template v-if="loggedIn">
       <p>Logged in as {{ user?.email }}</p>
-      <button @click="onLogout">Logout</button>
+      <button @click="onLogout">
+        Logout
+      </button>
     </template>
     <template v-else>
       <p>

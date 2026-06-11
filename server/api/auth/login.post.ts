@@ -1,4 +1,5 @@
 import { eq } from 'drizzle-orm'
+import type { User } from '#shared/models/user'
 import { db } from '../../db'
 import { users } from '../../db/schema'
 
@@ -24,5 +25,6 @@ export default defineEventHandler(async (event) => {
   await setUserSession(event, {
     user: { id: user.id, email: user.email },
   })
-  return { id: user.id, email: user.email }
+  const result: User = { id: user.id, email: user.email }
+  return result
 })
